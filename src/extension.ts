@@ -22,21 +22,11 @@ export function activate(context: vscode.ExtensionContext) {
       // The code you place here will be executed every time your command is executed
 
       // Display a message box to the user
-      vscode.window.showInformationMessage("Hello World!");
-    },
-  );
+      const folderPath = vscode.workspace.workspaceFolders[0].uri
+        .toString()
+        .split(":")[1];
 
-  context.subscriptions.push(disposable);
-}
-
-// this method is called when your extension is deactivated
-export function deactivate() {}
-
-const [ workSpaceFolder: { uri } ] = vscode.workspace.workspaceFolders;
-
-const [ folderPath ] = uri.toString().split(":");
-
-const htmlContent = `<!DOCTYPE html>
+      const htmlContent = `<!DOCTYPE html>
   <html lang="en">
   <head>
       <meta charset="UTF-8" />
@@ -50,10 +40,18 @@ const htmlContent = `<!DOCTYPE html>
   </body>
   </html>`;
 
-fs.writeFile(path.join(folderPath, "index.html"), htmlContent, err => {
-  if (err) {
-    vscode.window.showErrorMessage("Failed to create boilerplate file!");
-  } else {
-    vscode.window.showInformationMessage("Created boilerplate files");
-  }
-});
+      fs.writeFile(path.join(folderPath, "index.html"), htmlContent, err => {
+        if (err) {
+          vscode.window.showErrorMessage("Failed to create boilerplate file!");
+        } else {
+          vscode.window.showInformationMessage("Created boilerplate files");
+        }
+      });
+    },
+  );
+
+  context.subscriptions.push(disposable);
+}
+
+// this method is called when your extension is deactivated
+export function deactivate() {}
