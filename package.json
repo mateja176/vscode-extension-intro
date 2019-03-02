@@ -10,7 +10,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:extension.helloWorld"
+    "onCommand:extension.createBoilerplate"
   ],
   "main": "./out/extension.js",
   "contributes": {
