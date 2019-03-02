@@ -22,7 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
       // The code you place here will be executed every time your command is executed
 
       // Display a message box to the user
-      const folderPath = vscode.workspace.workspaceFolders[0].uri
+      const folderPath = (vscode.workspace.workspaceFolders || [])[0].uri
         .toString()
         .split(":")[1];
 
