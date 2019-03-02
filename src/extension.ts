@@ -26,20 +26,12 @@ export function activate(context: vscode.ExtensionContext) {
         .toString()
         .split(":")[1];
 
-      const htmlContent = `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <link rel="stylesheet" href="app.css" />
-  </head>
-  <body>
-    <script src="app.js"></script>
-  </body>
-</html>
-`;
+      const htmlContent = fs.readFileSync(
+        path.join(__dirname, "../templates/index.html"),
+        {
+          encoding: "UTF-8",
+        },
+      );
 
       fs.writeFile(path.join(folderPath, "index.html"), htmlContent, err => {
         if (err) {
